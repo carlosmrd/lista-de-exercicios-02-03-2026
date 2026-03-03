@@ -43,9 +43,9 @@ def menu():
 
 #Exercício 1
 def variaveis_simples():
-# Crie um programa que demonstra o uso de variáveis básicas (inteiros, floats, strings e
-# booleanos). Após entender como funciona, modifique o programa para incluir mais dois
-# tipos de variáveis: uma lista e um dicionário.
+#Crie um programa que demonstra o uso de variáveis básicas (inteiros, floats, strings e
+#booleanos). Após entender como funciona, modifique o programa para incluir mais dois
+#tipos de variáveis: uma lista e um dicionário.
 
     print("\nTemos 6 tipos de varíaveis básicas, aqui está um exemplo de cada uma delas")
 
@@ -182,7 +182,7 @@ def loja_virtual():
 #Uma loja virtual apresenta ao usuário a possibilidade de escolher entre diferentes
 #produtos (mínimo de 3) e suas quantidades, calcular o valor total de um pedido e
 #incluirdescontos baseados na quantidade de itens (5) comprados e adicione a opção de
-#calcular ofrete baseado em correio, transportadora e motoboy.
+#calcular o frete baseado em correio, transportadora e motoboy.
 
     produtos = {
         "Teclado": 95.60,
