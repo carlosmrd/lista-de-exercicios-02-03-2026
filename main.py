@@ -1,7 +1,7 @@
 import math
 import random
 
-
+#Menu
 def menu():
 
     while True:
@@ -32,7 +32,16 @@ def menu():
             loja_virtual()
         case 5:
             adivinhacao()
+        case 6:
+            notas_finais()
+        case 7:
+            peso_ideal()
+        case 8:
+            sistema_loja_com_pagamento()
+        case _:
+            print("Opção inválida")
 
+#Exercício 1
 def variaveis_simples():
 # Crie um programa que demonstra o uso de variáveis básicas (inteiros, floats, strings e
 # booleanos). Após entender como funciona, modifique o programa para incluir mais dois
@@ -63,6 +72,7 @@ def variaveis_simples():
 
     retornar_ao_menu()
 
+#Exercício 2
 def entrada_de_dados():
 #O programa irá solicitar que o usuário insira um nome e um número. Verificar se o
 #número digitado é par ou ímpar, validar se o nome contém mais de 3 caracteres. Se
@@ -90,6 +100,7 @@ def entrada_de_dados():
 
     retornar_ao_menu()
 
+#Exercício 3
 def operacoes_matematicas_basicas():
 #Descrição: Um programa que realiza operações matemáticas básicas (soma, subtração,
 #multiplicação, divisão, raiz quadrada e logaritmo) entre dois números fornecidos
@@ -166,6 +177,7 @@ def operacoes_matematicas_basicas():
 
     retornar_ao_menu()
 
+#Exercício 4
 def loja_virtual():
 #Uma loja virtual apresenta ao usuário a possibilidade de escolher entre diferentes
 #produtos (mínimo de 3) e suas quantidades, calcular o valor total de um pedido e
@@ -276,6 +288,7 @@ def loja_virtual():
 
     retornar_ao_menu()
 
+#Exercício 5
 def adivinhacao():
 #Um programa que permite ao usuário adivinhar um número e recebe feedback se o palpite
 #foi maior ou menor que o número correto. Expanda o programa para incluir diferentes
@@ -332,7 +345,238 @@ def adivinhacao():
 
     retornar_ao_menu()
 
+#Exercício 6
+def notas_finais():
+#Um programa que calcula as somas das notas de provas e trabalhos e determina se o
+#aluno foi aprovado, está em recuperação, ou foi reprovado. Adicione a funcionalidade
+#de calcular médias trimestrais e uma média anual ao final.
+
+    total_ano = 0.0
+
+    print("Insira as notas de cada avaliação.")
+
+    for trimestre in range(0, 4):
+        print(f"\n{trimestre}º trimestre.")
+
+        while True:
+            try:
+                prova1 = float(input("Prova 1 (0 a 30): "))
+                if 0 <= prova1 <= 30:
+                    break
+                print("Valor inválido")
+            except ValueError:
+                print("Valor inválido")
+
+        while True:
+            try:
+                prova2 = float(input("Prova 2 (0 a 30): "))
+                if 0 <= prova2 <= 30:
+                    break
+                print("Valor inválido")
+            except ValueError:
+                print("Valor inválido")
+
+        while True:
+            try:
+                trabalho = float(input("Trabalho (0 a 40): "))
+                if 0 <= trabalho <= 40:
+                    break
+                print("Valor inválido")
+            except ValueError:
+                print("Valor inválido")
+
+        total_trimestre = prova1 + prova2 + trabalho
+        total_ano += total_trimestre
+
+        print(f"Média do {trimestre}º trimestre: {total_trimestre:.1f}/100")
+
+    media_anual = total_ano / 4
+    print(f"\nMédia anual: {media_anual:.1f}/100")
+
+    if media_anual >= 70:
+        print("Situação: Aluno Aprovado")
+    else:
+        print("Situação: Aluno Reprovado")
+
+    retornar_ao_menu()
+
+#Exercício 7
+def peso_ideal():
+#Um programa que calcula o peso ideal baseado na altura e sexo do usuário, também calcular
+#o IMC (Índice de Massa Corporal) e fazer recomendações baseadas no resultado.
+#Homens
+#Peso_Ideal=(Altura_cm−100)−Altura_cm−1504Peso\_Ideal = (Altura\_{cm} - 100) -\frac{Altura\_{cm} - 150}{4}Peso_Ideal=(Altura_cm−100)−4Altura_cm−150
+#Mulheres
+#Peso_Ideal=(Altura_cm−100)−Altura_cm−1502Peso\_Ideal = (Altura\_{cm} - 100) -\frac{Altura\_{cm} - 150}{2}Peso_Ideal=(Altura_cm−100)−2Altura_cm−150
+#IMC=(Altura (cm)/100)2Peso (kg)
+
+    print("Calculadora para IMC e peso ideal.")
+
+    while True:
+        sexo = input("Sexo (M/F): ").strip().lower()
+        if sexo in ("m", "f"):
+            break
+        else:
+            print("Valor inválido. Digite M ou F.")
+
+    while True:
+        try:
+            altura_cm = float(input("Altura em cm: "))
+            if altura_cm < 0:
+                print("Valor inválido")
+            else:
+                break
+        except ValueError:
+            print("Valor inválido")
+
+    while True:
+        try:
+            peso = float(input("Peso em kg: "))
+            if peso < 0:
+                print("Valor inválido")
+            else:
+                break
+        except ValueError:
+            print("Valor inválido")
+
+    if sexo == "m":
+        valor_peso_ideal = (altura_cm - 100) - ((altura_cm - 150) / 4)
+    else:
+        valor_peso_ideal = (altura_cm - 100) - ((altura_cm - 150) / 2)
+
+    altura_m = altura_cm / 100
+    imc = peso / math.pow(altura_m, 2)
+
+    print(f"\nSeu peso ideal: {valor_peso_ideal:.1f}kg")
+    print(f"Seu IMC: {imc:.1f}kg/m²")
+
+    if imc < 18.5:
+        print("Classificação: Abaixo do peso.")
+    elif imc < 25:
+        print("Classificação: Peso normal.")
+    elif imc < 30:
+        print("Classificação: Sobrepeso.")
+    else:
+        print("Classificação: Obesidade.")
+
+    retornar_ao_menu()
+
+#Exercício 8
+def sistema_loja_com_pagamento():
+#Crie um sistema de loja onde o usuário pode escolher produtos, calcular o total, e optar
+#por pagamento à vista ou parcelado. Adicione taxas de juros para pagamentos parcelados.
+
+    produtos = {
+        "Teclado": 95.60,
+        "Monitor": 730.90,
+        "Notebook": 2450.95,
+        "Mouse sem fio": 110.30,
+        "Mouse com fio": 50.95
+    }
+
+    ids = list(produtos.keys())
+    carrinho = {}
+
+    juros_ao_mes = None
+    parcelas = None
+
+    print("\nBem vindo!")
+
+    while True:
+        print("\nProdutos disponíveis:")
+        for index, (produto, valor) in enumerate(produtos.items(), start=1):
+            print(f"ID: {index} - {produto} - R${valor:.2f}")
+
+        try:
+            id_produto = int(input("\nInsira o ID do produto: "))
+        except ValueError:
+            print("Valor inválido")
+            continue
+
+        if not (1 <= id_produto <= len(produtos)):
+            print("Produto inexistente.")
+            continue
+
+        try:
+            quantidade = int(input("Selecione a quantidade: "))
+        except ValueError:
+            print("Valor inválido")
+            continue
+
+        if quantidade <= 0:
+            print("Valor inválido")
+            continue
+
+        produto_escolhido = ids[id_produto - 1]
+        carrinho[produto_escolhido] = carrinho.get(produto_escolhido, 0) + quantidade
+
+        print("\nCarrinho atual:")
+        for nome, qtd in carrinho.items():
+            print(f"{nome}: {qtd} un.")
+
+        opcao = input("\nDeseja adicionar mais itens? (S/N) ").lower()
+        if opcao != "s":
+            break
+
+    subtotal = sum(produtos[nome] * qtd for nome, qtd in carrinho.items())
+    print(f"\nSubtotal: R${subtotal:.2f}")
+
+    while True:
+        print("\nFormas de pagamento:")
+        print("1. À vista (10% de desconto)")
+        print("2. Parcelado (juros compostos ao mês)")
+
+        try:
+            forma = int(input("Selecione a forma de pagamento: "))
+        except ValueError:
+            print("Opção inválida")
+            continue
+
+        if forma == 1:
+            total_final = subtotal * 0.90
+            print(f"\nTotal à vista (com desconto): R${total_final:.2f}")
+            break
+
+        elif forma == 2:
+            while True:
+                try:
+                    parcelas = int(input("Número de parcelas (max. 12): "))
+                except ValueError:
+                    print("Valor inválido")
+                    continue
+
+                if not (2 <= parcelas <= 12):
+                    print("Valor inválido")
+                    continue
+                break
+
+            while True:
+                try:
+                    juros_ao_mes = float(input("Juros ao mês em %: "))
+                except ValueError:
+                    print("Valor inválido")
+                    continue
+
+                if juros_ao_mes < 0:
+                    print("Valor inválido")
+                    continue
+                break
+
+            i = juros_ao_mes / 100.0
+            montante = subtotal * ((1 + i) ** parcelas)
+            valor_parcela = montante / parcelas
+
+            print(f"\nTotal parcelado: R${montante:.2f}")
+            print(f"{parcelas}x de R${valor_parcela:.2f}")
+            break
+
+        else:
+            print("Opção inválida")
+
+    retornar_ao_menu()
+
 def retornar_ao_menu():
+
     while True:
         opcao_retorno = str(input("\nDeseja retornar ao menu? (S/N) "))
         if opcao_retorno.lower() == "s" or opcao_retorno.lower() == "n":
