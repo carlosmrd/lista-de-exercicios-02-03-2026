@@ -27,8 +27,14 @@ def menu():
             EntradaDeDados()
         case 3:
             OperaçõesMatematicasBasicas()
+        case 4:
+            LojaVirtual()
 
 def VariaveisSimples():
+# Crie um programa que demonstra o uso de variáveis básicas (inteiros, floats, strings e
+# booleanos). Após entender como funciona, modifique o programa para incluir mais dois
+# tipos de variáveis: uma lista e um dicionário.
+
     print("\nTemos 6 tipos de varíaveis básicas, aqui está um exemplo de cada uma delas")
     inteiros = 1
     floats = 1.5
@@ -54,8 +60,12 @@ def VariaveisSimples():
     PromptRetornar()
 
 def EntradaDeDados():
+#O programa irá solicitar que o usuário insira um nome e um número. Verificar se o
+#número digitado é par ou ímpar, validar se o nome contém mais de 3 caracteres. Se
+#não, peça para o usuário digitar novamente.
+
     while True:
-        nome = input("Insira um nome: ")
+        nome = input("\nInsira um nome: ")
         if len(nome) < 3:
             print("Nome inválido, mínimo de 3 caracteres")
         else:
@@ -76,7 +86,11 @@ def EntradaDeDados():
     PromptRetornar()
 
 def OperaçõesMatematicasBasicas():
-    print("Operações matemáticas básicas entre dois valores.")
+#Descrição: Um programa que realiza operações matemáticas básicas (soma, subtração,
+#multiplicação, divisão, raiz quadrada e logaritmo) entre dois números fornecidos
+#pelo usuário.
+
+    print("\nOperações matemáticas básicas entre dois valores.")
 
     while True:
         try:
@@ -125,6 +139,47 @@ def OperaçõesMatematicasBasicas():
     print("O resultado é", resultado)
 
     PromptRetornar()
+
+def LojaVirtual():
+#Uma loja virtual apresenta ao usuário a possibilidade de escolher entre diferentes
+#produtos (mínimo de 3) e suas quantidades, calcular o valor total de um pedido e
+#incluirdescontos baseados na quantidade de itens (5) comprados e adicione a opção de
+#calcular ofrete baseado em correio, transportadora e motoboy.
+    produtos = {
+        "Teclado": 95.60,
+        "Monitor": 730.90,
+        "Notebook": 2450.95,
+        "Mouse sem fio": 110.30,
+        "Mouse com fio": 50.95
+    }
+
+    print("\nBem vindo! Produtos disponíveis:")
+    for index, (produto, valor) in enumerate(produtos.items()):
+        print(f"ID: {index + 1}. {produto} - R${valor:.2f}")
+
+    carrinho = {}
+
+    while True:
+        try:
+            idProduto = int(input("Insira o ID do produto a adicionar ao carrinho: "))
+            if idProduto < 0 or idProduto > len(produtos):
+                print("Produto inexistente.")
+            else:
+                while True:
+                    try:
+                        quantidade = int(input("Selecione a quantidade: "))
+                        if quantidade < 0:
+                            print("Valor inválido")
+                        else:
+
+                            break
+                    except ValueError:
+                        print("Valor inválido")
+        except ValueError:
+            print("Valor inválido")
+
+
+
 
 def PromptRetornar():
     while True:
