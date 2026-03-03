@@ -1,41 +1,45 @@
 import math
+import random
 
 
 def menu():
-    print("Selecione um exercício:")
-    print("1. Variáveis Simples")
-    print("2. Entrada de Dados")
-    print("3. Operações Matemáticas Básicas")
-    print("4. Loja Virtual")
-    print("5. Adivinhação")
-    print("6. Notas Finais")
-    print("7. Peso Ideal")
-    print("8. Sistema de Loja com Pagamento")
-    print("0. Sair")
 
     while True:
+        print("Selecione um exercício:")
+        print("1. Variáveis Simples")
+        print("2. Entrada de Dados")
+        print("3. Operações Matemáticas Básicas")
+        print("4. Loja Virtual")
+        print("5. Adivinhação")
+        print("6. Notas Finais")
+        print("7. Peso Ideal")
+        print("8. Sistema de Loja com Pagamento")
+        print("0. Sair")
         try:
-            opcao = int(input("Selecione uma opção: "))
+            opcao_menu = int(input("Selecione uma opção: "))
             break
         except ValueError:
-            print("Valor inválido")
+            print("Opção inválida")
 
-    match opcao:
+    match opcao_menu:
         case 1:
-            VariaveisSimples()
+            variaveis_simples()
         case 2:
-            EntradaDeDados()
+            entrada_de_dados()
         case 3:
-            OperaçõesMatematicasBasicas()
+            operacoes_matematicas_basicas()
         case 4:
-            LojaVirtual()
+            loja_virtual()
+        case 5:
+            adivinhacao()
 
-def VariaveisSimples():
+def variaveis_simples():
 # Crie um programa que demonstra o uso de variáveis básicas (inteiros, floats, strings e
 # booleanos). Após entender como funciona, modifique o programa para incluir mais dois
 # tipos de variáveis: uma lista e um dicionário.
 
     print("\nTemos 6 tipos de varíaveis básicas, aqui está um exemplo de cada uma delas")
+
     inteiros = 1
     floats = 1.5
     strings = "Exemplo"
@@ -57,9 +61,9 @@ def VariaveisSimples():
     print(lista, type(lista))
     print(dicionario, type(dicionario))
 
-    PromptRetornar()
+    retornar_ao_menu()
 
-def EntradaDeDados():
+def entrada_de_dados():
 #O programa irá solicitar que o usuário insira um nome e um número. Verificar se o
 #número digitado é par ou ímpar, validar se o nome contém mais de 3 caracteres. Se
 #não, peça para o usuário digitar novamente.
@@ -67,13 +71,14 @@ def EntradaDeDados():
     while True:
         nome = input("\nInsira um nome: ")
         if len(nome) < 3:
-            print("Nome inválido, mínimo de 3 caracteres")
+            print("Nome inválido, mínimo de 3 caracteres.")
         else:
+            print("O nome inserido tem mais de 3 caracteres.")
             break
 
     while True:
         try:
-            numero = int(input("Insira um número: "))
+            numero = int(input("\nInsira um número: "))
             break
         except ValueError:
             print("Valor inválido")
@@ -83,9 +88,9 @@ def EntradaDeDados():
     else:
         print(numero, "é ímpar.")
 
-    PromptRetornar()
+    retornar_ao_menu()
 
-def OperaçõesMatematicasBasicas():
+def operacoes_matematicas_basicas():
 #Descrição: Um programa que realiza operações matemáticas básicas (soma, subtração,
 #multiplicação, divisão, raiz quadrada e logaritmo) entre dois números fornecidos
 #pelo usuário.
@@ -94,57 +99,79 @@ def OperaçõesMatematicasBasicas():
 
     while True:
         try:
-            primeiroValor = float(input("Primeiro valor: "))
+            primeiro_valor = float(input("Primeiro valor: "))
             break
         except ValueError:
             print("Valor inválido")
 
-    print("Possíveis operações:")
-    print("1. Soma")
-    print("2. Subtração")
-    print("3. Multiplicação")
-    print("4. Divisão")
-    print("5. Raiz Quadrada")
-    print("6. Logaritmo")
-
     while True:
+        print("\nPossíveis operações:")
+        print("1. Soma")
+        print("2. Subtração")
+        print("3. Multiplicação")
+        print("4. Divisão")
+        print("5. Raiz Quadrada")
+        print("6. Logaritmo")
         try:
             operacao = int(input("Selecione a operação: "))
             break
         except ValueError:
-            print("Valor inválido")
+            print("Operação inválida")
 
-    if operacao != 5 and operacao != 6:
-        while True:
-            try:
-                segundoValor = float(input("Segundo valor: "))
+    while True:
+        match operacao:
+            case 1 | 2 | 3 | 4:
+                while True:
+                    try:
+                        segundo_valor = float(input("Segundo valor: "))
+                        break
+                    except ValueError:
+                        print("Valor inválido")
+                if operacao == 1:
+                    resultado = primeiro_valor + segundo_valor
+                    print("\nO resultado é", resultado)
+                    break
+                elif operacao == 2:
+                    resultado = primeiro_valor - segundo_valor
+                    print("\nO resultado é", resultado)
+                    break
+                elif operacao == 3:
+                    resultado = primeiro_valor * segundo_valor
+                    print("\nO resultado é", resultado)
+                    break
+                else:
+                    if segundo_valor == 0:
+                        print("\nNão é possível dividir por zero.")
+                        break
+                    resultado = primeiro_valor / segundo_valor
+                    print("\nO resultado é", resultado)
+                    break
+            case 5:
+                if primeiro_valor == 0:
+                    print("\nNão é possível dividir por zero.")
+                    break
+                resultado = math.sqrt(primeiro_valor)
+                print("\nO resultado é", resultado)
                 break
-            except ValueError:
-                print("Valor inválido")
+            case 6:
+                if primeiro_valor == 0:
+                    print("\nNão é possível dividir por zero.")
+                    break
+                resultado = math.log(primeiro_valor)
+                print("\nO resultado é", resultado)
+                break
+            case _:
+                print("Operação inválida")
+                continue
 
-    match operacao:
-        case 1:
-            resultado = primeiroValor + segundoValor
-        case 2:
-            resultado = primeiroValor - segundoValor
-        case 3:
-            resultado = primeiroValor * segundoValor
-        case 4:
-            resultado = primeiroValor / segundoValor
-        case 5:
-            resultado = math.sqrt(primeiroValor)
-        case 6:
-            resultado = math.log(primeiroValor)
+    retornar_ao_menu()
 
-    print("O resultado é", resultado)
-
-    PromptRetornar()
-
-def LojaVirtual():
+def loja_virtual():
 #Uma loja virtual apresenta ao usuário a possibilidade de escolher entre diferentes
 #produtos (mínimo de 3) e suas quantidades, calcular o valor total de um pedido e
 #incluirdescontos baseados na quantidade de itens (5) comprados e adicione a opção de
 #calcular ofrete baseado em correio, transportadora e motoboy.
+
     produtos = {
         "Teclado": 95.60,
         "Monitor": 730.90,
@@ -153,44 +180,166 @@ def LojaVirtual():
         "Mouse com fio": 50.95
     }
 
-    print("\nBem vindo! Produtos disponíveis:")
-    for index, (produto, valor) in enumerate(produtos.items()):
-        print(f"ID: {index + 1}. {produto} - R${valor:.2f}")
+    ids = list(produtos.keys())
 
     carrinho = {}
 
+    print("\nBem vindo!")
+
     while True:
+        print("Produtos disponíveis:")
+
+        for index, (produto, valor) in enumerate(produtos.items(), start=1):
+            print(f"ID: {index} - {produto} - R${valor:.2f}")
+
         try:
-            idProduto = int(input("Insira o ID do produto a adicionar ao carrinho: "))
-            if idProduto < 0 or idProduto > len(produtos):
+            id_produto = int(input("\nInsira o ID do produto a adicionar ao carrinho: "))
+            if id_produto < 0 or id_produto > len(produtos):
                 print("Produto inexistente.")
             else:
-                while True:
-                    try:
-                        quantidade = int(input("Selecione a quantidade: "))
-                        if quantidade < 0:
-                            print("Valor inválido")
-                        else:
-
-                            break
-                    except ValueError:
+                try:
+                    quantidade = int(input("\nSelecione a quantidade: "))
+                    if quantidade < 0:
                         print("Valor inválido")
+                    else:
+                        produto_escolhido = ids[id_produto - 1]
+                        carrinho[produto_escolhido] = carrinho.get(produto_escolhido, 0) + quantidade
+
+                        print("\nCarrinho atual:")
+                        for nome, qtd in carrinho.items():
+                            print(f"{nome}: {qtd} un.")
+
+
+                        opcao_mais_itens = str(input("\nDeseja adicionar mais itens? (S/N) "))
+                        if opcao_mais_itens.lower() == "s" or opcao_mais_itens.lower() == "n":
+                            if opcao_mais_itens != "s":
+                                break
+                        else:
+                            print("Valor inválido")
+
+                except ValueError:
+                    print("Valor inválido")
+
         except ValueError:
             print("Valor inválido")
 
+    total_itens = sum(carrinho.values())
+    subtotal = sum(produtos[nome] * qtd for nome, qtd in carrinho.items())
 
+    if total_itens >= 5:
+        print("\nDesconto de 10% aplicável devido a compra de 5 ou mais itens.")
+        valor_final = subtotal
+        valor_final -= subtotal * 0.10
+    else:
+        valor_final = subtotal
 
+    valor_entrega = None
 
-def PromptRetornar():
+    while True:
+        print("\nOpções de entrega:")
+        print(f"1. Correios: R${total_itens * 12:.2f}")
+        print(f"2. Transportadora: R${total_itens * 10:.2f}")
+        if total_itens <= 3:
+            print(f"3. Motoboy: R${total_itens * 5:.2f}")
+        try:
+            opcao_entrega = int(input("\nSelecione a forma de entrega: "))
+            if opcao_entrega < 0:
+                print("Opção inválida")
+            else:
+                match opcao_entrega:
+                    case 1:
+                        valor_entrega = total_itens * 12
+                        break
+                    case 2:
+                        valor_entrega = total_itens * 10
+                        break
+                    case 3:
+                        if total_itens <= 3:
+                            valor_entrega = total_itens * 5
+                            break
+                        else:
+                            print("Opção não aplicável para compras com 4 ou mais itens.")
+                        continue
+                    case _:
+                        print("Opção inválida")
+                        continue
+
+        except ValueError:
+            print("Opção inválida")
+
+    print("\nResumo do pedido:")
+    print(f"Itens no total: {total_itens}")
+    print(f"Subtotal: R${subtotal:.2f}")
+    print(f"Desconto: R${subtotal * 0.10:.2f}")
+    print(f"Entrega: R${valor_entrega:.2f}")
+    print(f"Total final: R${valor_final + valor_entrega:.2f}")
+
+    retornar_ao_menu()
+
+def adivinhacao():
+#Um programa que permite ao usuário adivinhar um número e recebe feedback se o palpite
+#foi maior ou menor que o número correto. Expanda o programa para incluir diferentes
+#níveis de dificuldade (fácil, médio, difícil), onde o intervalo de números varia.
+
+    valor_min = None
+    valor_max = None
+
+    while True:
+        print(f"\nTente adivinhar o número secreto! Escolha a dificuldade:")
+        print(f"1. Fácil - Entre 1 e 10")
+        print(f"2. Médio - Entre 1 e 25")
+        print(f"3. Difícil - Entre 1 e 100")
+        try:
+            dificuldade = int(input("Selecione uma opção: "))
+            match dificuldade:
+                case 1:
+                    valor_min = 1
+                    valor_max = 10
+                    break
+                case 2:
+                    valor_min = 1
+                    valor_max = 25
+                    break
+                case 3:
+                    valor_min = 1
+                    valor_max = 100
+                    break
+                case _:
+                    print("Opção inválida")
+                    continue
+        except ValueError:
+            print("Opção inválida")
+
+    numero_aleatorio = random.randint(valor_min, valor_max)
+
     while True:
         try:
-            option = str(input("\nDeseja retornar ao menu? (S/N) "))
-            if option.lower() == "s" or option.lower() == "n":
+            palpite = int(input("\nInsira seu palpite: "))
+            if palpite < valor_min:
+                print(f"O número não pode ser menor que {valor_min:.0f}.")
+            elif palpite > valor_max:
+                print(f"O número não pode ser maior que {valor_max:.0f}.")
+            elif palpite > numero_aleatorio:
+                print(f"O número secreto é menor que {palpite:.0f}.")
+            elif palpite < numero_aleatorio:
+                print(f"O número secreto é maior que {palpite:.0f}.")
+            else:
+                print(f"Você acertou! O número era {numero_aleatorio:.0f}.")
                 break
-            else: print("Valor inválido")
-        except: print("Valor inválido")
 
-    match option:
+        except ValueError:
+            print("Valor inválido")
+
+    retornar_ao_menu()
+
+def retornar_ao_menu():
+    while True:
+        opcao_retorno = str(input("\nDeseja retornar ao menu? (S/N) "))
+        if opcao_retorno.lower() == "s" or opcao_retorno.lower() == "n":
+            break
+        else: print("Valor inválido")
+
+    match opcao_retorno.lower():
         case "s":
             menu()
         case "n":
